@@ -1,0 +1,58 @@
+/* Header styling - fixed to the top */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(63 63 70);
+    padding: 5px 20px;
+    position: fixed; /* Fix the header to the top */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; /* Ensure it stays on top of other elements */
+    height: 35px; /* Reduced height */
+  }
+  
+  /* Icon image */
+  /* .icon {
+    height: 30px;
+    width: 30px;
+    margin-right: 10px; /* Add space between icon and buttons */
+  } */
+  
+  /* Container for the left-side buttons (icon, home, and history) */
+  .left-section {
+    display: flex;
+    align-items: center; /* Align the icon and buttons vertically */
+  }
+  
+  /* Button styling */
+  .header-button {
+    background-color:  rgb(33, 33, 35);
+    /* background-color:  rgb(63 63 70); */
+    color: white;
+    border: none;
+    /* padding: 5px ;  */
+     margin-left: 8px;
+    cursor: pointer;
+    font-size: 14px; /* Slightly smaller font size */
+    border-radius: 5px;
+  }
+  
+  .header-button:hover {
+    background-color: #131212;
+  }
+  .header-button2:hover {
+    background-color: #131212;
+  }
+  .header-button2{
+    background-color: #003366;
+    color: white;
+    border: none;
+    /* padding: 5px ;  */
+     margin-left: 8px;
+    cursor: pointer;
+    font-size: 14px; /* Slightly smaller font size */
+    border-radius: 5px;
+  }
+  

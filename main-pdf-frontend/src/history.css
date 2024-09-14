@@ -1,0 +1,106 @@
+/* Container and layout for the history page */
+.history-container {
+    background-color: #1f1f1f;
+    color: white;
+    height: 95vh;
+    width: 100vw;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Style for the heading, fixed to the top center */
+h2 {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #2b2b2b;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #4CAF50;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    text-align: center;
+    margin-top: 60px;
+}
+
+/* Ensure divs start from the top-left corner and maintain their layout */
+.history-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 items per row */
+    gap: 20px; /* Spacing between items */
+    width: 100%;
+    margin-top: 150px; /* Adjusted margin to create space below the fixed heading */
+    justify-items: center;
+}
+
+/* Style for each PDF history item */
+.history-item {
+    background-color: #2d2d2d;
+    border-radius: 0.5rem;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    width: 300px; /* Fixed width for each box */
+    min-height: 180px; /* Ensure a minimum height for each box */
+}
+
+/* Center text for PDF details */
+.pdf-details {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.pdf-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.pdf-date {
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+/* Ensure buttons are horizontally aligned */
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Spacing between Download and Delete buttons */
+}
+
+/* Styling for the Download button */
+.download-link {
+    background-color: #4CAF50;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: white;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s;
+}
+
+.download-link:hover {
+    background-color: #45a049;
+}
+
+/* Styling for the Delete button */
+.delete-button {
+    background-color: #FF6347;
+    padding: 10px 20px;
+    border: none;
+    color: white;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.delete-button:hover {
+    background-color: #FF4500;
+}

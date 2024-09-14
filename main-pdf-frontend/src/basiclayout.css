@@ -1,0 +1,38 @@
+/* Container for stacked boxes */
+.container {
+    display: grid;
+    grid-template-rows: 1fr 1fr; /* Two rows for stacked boxes */
+    grid-template-columns: 1fr 1fr; /* Two equal-width columns */
+    height: calc(100vh - 120px); /* Adjust height minus the full-width div */
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .left, .right, .left2, .right2 {
+    border: 0.2px solid black;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 1rem;
+  }
+  
+  .left {
+    background-color: #3C3D37;
+    height: 7cm
+  
+  }
+  
+  .right {
+    background-color: lightcoral;
+    height: 2cm;
+    width: 25cm;
+  }
+  
+  .left2 {
+    background-color: #3C3D37;
+    height: 7cm;
+  }
+  
+  .right2 {
+    background-color: #697565;
+    height: 12cm;
+  }

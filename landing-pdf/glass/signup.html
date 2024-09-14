@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up / Sign In</title>
+  <link rel="stylesheet" href="styles.css"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.0.9/css/boxicons.min.css"> <!-- Boxicons for icons -->
+</head>
+<body>
+<div id="container" class="container">
+
+ 
+  <div class="row">
+   
+    <div class="col align-items-center flex-col sign-up">
+      <div class="form-wrapper align-items-center">
+        <div class="form sign-up">
+          
+          <form action="" id="registration">
+            <div class="input-group">
+              <i class='bx bxs-user'></i>
+              <input type="text" placeholder="Username" id="username">
+            </div>
+            <div class="input-group">
+              <i class='bx bx-mail-send'></i>
+              <input type="email" placeholder="Email" id="email">
+            </div>
+            <div class="input-group">
+              <i class='bx bxs-lock-alt'></i>
+              <input type="password" placeholder="Password" id="password">
+            </div>
+            <div class="input-group">
+              <i class='bx bxs-lock-alt'></i>
+              <input type="password" placeholder="Confirm password">
+            </div>
+            <button type="submit">
+              Sign up
+            </button>
+          </form>
+
+          <p>
+            <span>
+              Already have an account?
+            </span>
+            <b onclick="toggle()" class="pointer">
+              Sign in here
+            </b>
+          </p>
+        </div>
+      </div>
+    </div>
+   
+
+    <div class="col align-items-center flex-col sign-in">
+      <div class="form-wrapper align-items-center">
+        <div class="form sign-in">
+          <div class="input-group">
+            <i class='bx bxs-user'></i>
+            <input type="text" placeholder="Username">
+          </div>
+          <div class="input-group">
+            <i class='bx bxs-lock-alt'></i>
+            <input type="password" placeholder="Password">
+          </div>
+          <button>
+            Sign in
+          </button>
+          
+          <p>
+            <span>
+              Don't have an account?
+            </span>
+            <b onclick="toggle()" class="pointer">
+              Sign up here
+            </b>
+          </p>
+        </div>
+      </div>
+      <div class="form-wrapper">
+      </div>
+    </div>
+   
+  </div>
+ 
+  <div class="row content-row">
+   
+    <div class="col align-items-center flex-col">
+      <div class="text sign-in">
+    
+        
+        <h2>Welcome</h2>
+      </div>
+      <div class="img sign-in">
+      </div>
+    </div>
+   
+    <div class="col align-items-center flex-col">
+      <div class="img sign-up">
+      </div>
+      <div class="text sign-up">
+        <h2>Join with us</h2>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
