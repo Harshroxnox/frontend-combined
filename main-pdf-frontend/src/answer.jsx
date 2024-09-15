@@ -55,6 +55,44 @@ function Answer() {
     }
   };
 
+  
+const UploadForm = document.getElementById("upload");
+
+UploadForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const form = event.target;
+    const formdata = new FormData(form);
+    console.log(formdata);
+
+    const token = localStorage.getItem('token');
+
+    fetch("http://127.0.0.1:5000/upload", {
+        method : 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        body : formdata
+    }).then((response) => {
+        if(!response.ok){
+            console.log(response);
+            throw new Error("Upload Unsuccessful");
+        }
+        return response.json();
+    }).then((data) => {
+        console.log(data);
+        if('error' in data){
+            console.log(data.error);
+        }
+        else{
+            
+        }
+    }).catch((e) => {
+        console.error(`Error : ${e}`);
+    });
+});
+
+
   return (
     <div className="container">
       <div className="leftsection">
@@ -85,16 +123,19 @@ function Answer() {
               <p>No PDFs uploaded yet.</p>
             )}
           </div>
+          <form action="" id="upload" method='post'>
           <input
             type="file"
             id="fileInput"
+            name='pdf_file'
             multiple
             onChange={handleFileChange}
             style={{ display: 'none' }}
           />
-          <label htmlFor="fileInput" className="upload-button">
-            Upload PDFs
+          <label htmlFor="fileInput" className="upload-button" >
+            <button type='submit'>Upload PDFs</button>
           </label>
+          </form>
         </div>
         <div className="left2">
           <div className="small-box">

@@ -10,25 +10,17 @@ const Home = () => <div><Answer /></div>;
 const App = () => {
 
   useEffect(() => {
-    // Listener to receive messages from other ports
-    const handleMessage = (event) => {
-      // Verify the origin of the message
-     // if (event.origin !== "http://localhost:5500") return;
-
-      const { key, value } = event.data;
-      console.log(event.data)
-      // Store data in localStorage or handle it as needed
-      localStorage.setItem(key, value);
-      console.log(`Received data: ${key} = ${value}`);
-    };
-
-    // Add the event listener for message events
-    window.addEventListener("message", handleMessage);
-
-    // Clean up the event listener when component unmounts
-    return () => {
-      window.removeEventListener("message", handleMessage);
-    };
+    fetch("http://172.104.58.82:5000/account", {
+      method : 'GET',
+      headers : {
+        'Content-Type' : 'application/json'
+      },
+    }).then((response) => {
+      console.log(response)
+      return response.json()
+    }).then((data) => {
+      localStorage.setItem("token", data.token);
+    })
   }, []);
 
   const [history, setHistory] = useState([
