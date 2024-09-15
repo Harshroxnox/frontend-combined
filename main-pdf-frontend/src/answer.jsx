@@ -7,11 +7,10 @@ function Answer() {
   const [questions, setQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState('');
   const [answers, setAnswers] = useState([]);
-
-  // Reference to the container where the questions are displayed
+  const [error, setError] = useState(null);
   const rightSectionRef = useRef(null);
 
-  // Scroll to the bottom of the right2 div when a new question is added
+  // Scroll to the bottom when new question is added
   useEffect(() => {
     if (rightSectionRef.current) {
       rightSectionRef.current.scrollTop = rightSectionRef.current.scrollHeight;
@@ -22,6 +21,40 @@ function Answer() {
   const handleFileChange = (event) => {
     const files = Array.from(event.target.files);
     setPdfs(files.map(file => file.name));
+    uploadFiles(files); // Upload the files
+  };
+
+  // Upload files to the backend
+  const uploadFiles = async (files) => {
+    const formData = new FormData();
+    files.forEach(file => formData.append('pdf_file', file));
+
+    const token = localStorage.getItem('token');
+    
+    try {
+      const response = await fetch("http://127.0.0.1:5000/upload", {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Upload Unsuccessful");
+      }
+
+      const data = await response.json();
+      if (data.error) {
+        console.log(data.error);
+        setError(data.error);
+      } else {
+        console.log("Files uploaded successfully:", data);
+      }
+    } catch (e) {
+      console.error(`Error: ${e.message}`);
+      setError(e.message);
+    }
   };
 
   // Handle delete of a PDF
@@ -40,7 +73,7 @@ function Answer() {
   // Handle question submit
   const handleSubmitQuestion = () => {
     if (currentQuestion.trim() !== '') {
-      const randomAnswer = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, quidem? Corporis illum porro id autem iusto, commodi eum. Sunt ab, enim, tempore quos perspiciatis dolores pariatur aperiam nobis laudantium accusantium error, rerum voluptate numquam! ${currentQuestion}`; // Simulate an answer
+      const randomAnswer = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, quidem? ${currentQuestion}`; // Simulate an answer
       setQuestions([...questions, currentQuestion]);
       setAnswers([...answers, randomAnswer]);
       setCurrentQuestion(''); // Reset the input box
@@ -54,44 +87,6 @@ function Answer() {
       handleSubmitQuestion();
     }
   };
-
-  
-const UploadForm = document.getElementById("upload");
-
-UploadForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    const form = event.target;
-    const formdata = new FormData(form);
-    console.log(formdata);
-
-    const token = localStorage.getItem('token');
-
-    fetch("http://127.0.0.1:5000/upload", {
-        method : 'POST',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-          },
-        body : formdata
-    }).then((response) => {
-        if(!response.ok){
-            console.log(response);
-            throw new Error("Upload Unsuccessful");
-        }
-        return response.json();
-    }).then((data) => {
-        console.log(data);
-        if('error' in data){
-            console.log(data.error);
-        }
-        else{
-            
-        }
-    }).catch((e) => {
-        console.error(`Error : ${e}`);
-    });
-});
-
 
   return (
     <div className="container">
@@ -124,17 +119,17 @@ UploadForm.addEventListener("submit", (event) => {
             )}
           </div>
           <form action="" id="upload" method='post'>
-          <input
-            type="file"
-            id="fileInput"
-            name='pdf_file'
-            multiple
-            onChange={handleFileChange}
-            style={{ display: 'none' }}
-          />
-          <label htmlFor="fileInput" className="upload-button" >
-            <button type='submit'>Upload PDFs</button>
-          </label>
+            <input
+              type="file"
+              id="fileInput"
+              name='pdf_file'
+              multiple
+              onChange={handleFileChange}
+              style={{ display: 'none' }}
+            />
+            <label htmlFor="fileInput" className="upload-button">
+              Upload PDFs
+            </label>
           </form>
         </div>
         <div className="left2">
@@ -173,7 +168,7 @@ UploadForm.addEventListener("submit", (event) => {
             className="question-input"
             value={currentQuestion}
             onChange={(e) => setCurrentQuestion(e.target.value)}
-            onKeyPress={handleKeyPress} // Handle Enter key press here
+            onKeyPress={handleKeyPress}
             placeholder="Ask your question here..."
           />
           <button className="submit-button" onClick={handleSubmitQuestion}>
